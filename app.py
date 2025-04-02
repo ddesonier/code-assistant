@@ -15,7 +15,13 @@ from azure.search.documents.indexes import SearchIndexerClient
 from azure.core.credentials import AzureKeyCredential
 from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
+import logging
+import sys
 
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+
+print("Azure OpenAI API initialized")
+logging.info("Azure OpenAI API initialized")
 
 load_dotenv()
 # Azure OpenAI configuration
@@ -386,6 +392,8 @@ Format your response exactly as follows:
 
 
 def main():
+    logging.info("Starting AI Code Assistant")
+    logging.info("Azure OpenAI API Endpoint: %s", endpoint)
     st.set_page_config(
         page_title="AI Code Assistant",
         page_icon="🤖",

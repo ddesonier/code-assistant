@@ -1,25 +1,25 @@
+# app/Dockerfile
+
 FROM python:3.9-slim
+# FROM python:alpine3.20
 
-ARG AZURE_OPENAI_ENDPOINT
-ARG AZURE_OPENAI_CHATGPT_DEPLOYMENT
-ARG AZURE_OPENAI_KEY
-ARG AZURE_OPENAI_API_VERSION
-
-ENV AZURE_OPENAI_ENDPOINT=$AZURE_OPENAI_ENDPOINT
-ENV AZURE_OPENAI_CHATGPT_DEPLOYMENT=$AZURE_OPENAI_CHATGPT_DEPLOYMENT
-ENV AZURE_OPENAI_KEY=$AZURE_OPENAI_KEY
-ENV AZURE_OPENAI_API_VERSION=$AZURE_OPENAI_API_VERSION
-
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    software-properties-common \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY . /app
+RUN git clone https://github.com/ddesonier/code-assistant.git .
+
+
+RUN pip install -r requirements.txt
+
 EXPOSE 8501
 
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=127.0.0.1"]
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=127.0.0.1"]
