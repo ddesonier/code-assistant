@@ -79,6 +79,22 @@ This application provides a Streamlit-based interface to interact with Azure Ope
 
 ---
 
+### Docker
+
+```bash
+$ docker login damonsregistry.azurecr.io
+
+$ docker build --no-cache -t damonsregistry/app .
+
+$ docker run -p 8501:8501 damonsregistry/app
+
+$ docker tag damonsregistry/app damonsregistry.azurecr.io/app:v1
+
+$ docker push damonsregistry.azurecr.io/app:v1
+```
+
+---
+
 ## Contributing
 
 1. Fork this repository.  
