@@ -1,14 +1,5 @@
 FROM python:3.9-slim
 
-ARG AZURE_OPENAI_ENDPOINT
-ARG AZURE_OPENAI_CHATGPT_DEPLOYMENT
-ARG AZURE_OPENAI_KEY
-ARG AZURE_OPENAI_API_VERSION
-
-ENV AZURE_OPENAI_ENDPOINT=$AZURE_OPENAI_ENDPOINT
-ENV AZURE_OPENAI_CHATGPT_DEPLOYMENT=$AZURE_OPENAI_CHATGPT_DEPLOYMENT
-ENV AZURE_OPENAI_KEY=$AZURE_OPENAI_KEY
-ENV AZURE_OPENAI_API_VERSION=$AZURE_OPENAI_API_VERSION
 
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -17,7 +8,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt --verbose
 
 COPY . /app
 EXPOSE 8501
