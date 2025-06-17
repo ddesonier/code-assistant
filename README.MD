@@ -4,6 +4,27 @@ This application provides a Streamlit-based interface to interact with Azure Ope
 
 ---
 
+# 🤖 AI Code Assistant
+
+## High-Level Steps
+
+1. **Set Up Azure Resources**  
+   - Create a Resource Group, App Service Plan, and Web App in Azure.
+   - Configure Azure OpenAI, Storage Account, and AI Search.
+
+2. **Prepare Your Code**  
+   - Ensure your project includes a `requirements.txt` file and a startup file (e.g., `app.py` for Streamlit).
+
+3. **Deploy Your Code**  
+   - Use Azure CLI to deploy your Python code directly to the Web App.
+
+4. **Configure Environment Variables**  
+   - Add necessary environment variables in the Azure Portal for your app to function correctly.
+
+5. **Run and Verify**  
+   - Start your app and verify its functionality by browsing to the Web App URL.
+
+
 ## ✨ Features
 
 - **🤝 Azure OpenAI Integration**  
@@ -28,6 +49,99 @@ This application provides a Streamlit-based interface to interact with Azure Ope
 - 🐳 Docker Desktop installed  
 
 ---
+
+## Setting Up Development Environment Using WSL
+
+To set up your development environment on Windows using WSL (Windows Subsystem for Linux), follow these steps:
+
+---
+
+### 1️⃣ Install WSL
+
+1. Open PowerShell as Administrator and run:
+   ```powershell
+   wsl --install
+   ```
+2. Restart your computer if prompted.
+
+---
+
+### 2️⃣ Install a Linux Distribution
+
+1. After installing WSL, open the Microsoft Store and search for **"Linux distributions"** (e.g., Ubuntu).
+2. Select your preferred distribution (e.g., Ubuntu) and click **Install**.
+3. Launch the installed Linux distribution from the Start menu.
+4. Follow the on-screen instructions to complete the setup (e.g., creating a username and password).
+
+---
+
+### 3️⃣ Update and Install Required Packages
+
+1. Open your WSL terminal and update the package list:
+   ```bash
+   sudo apt update && sudo apt upgrade -y
+   ```
+
+2. Install Python 3.10 and required tools:
+   ```bash
+   sudo apt install -y python3.10 python3.10-venv python3-pip
+   ```
+
+3. Verify the installation:
+   ```bash
+   python3.10 --version
+   pip --version
+   ```
+
+---
+
+### 4️⃣ Set Up a Virtual Environment
+
+1. Navigate to your project directory:
+   ```bash
+   cd /path/to/your/project
+   ```
+
+2. Create a virtual environment:
+   ```bash
+   python3.10 -m venv venv
+   ```
+
+3. Activate the virtual environment:
+   ```bash
+   source venv/bin/activate
+   ```
+
+4. Install project dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+### 5️⃣ Run Your Application
+
+1. Start your application (e.g., Streamlit):
+   ```bash
+   streamlit run app.py
+   ```
+
+2. Open the provided URL in your browser to access the app.
+
+---
+
+### Notes
+
+- Ensure your WSL distribution has access to the internet for package installation.
+- Use `deactivate` to exit the virtual environment when done.
+- If you encounter issues, check your WSL version with:
+  ```bash
+  wsl --version
+  ```
+
+---
+
+
 
 ## ⚙️ Azure Resource Setup
 
@@ -99,10 +213,13 @@ Create a `.env` file with the following variables:
    ```
 
 2. **Create and activate a virtual environment:**
-   ```
-   python -m venv venv
-   venv\Scripts\activate  # For Windows
-   ```
+
+    Linux
+    ```
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+
 
 3. **Install dependencies:**
    ```

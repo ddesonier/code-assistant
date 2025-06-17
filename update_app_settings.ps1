@@ -1,5 +1,5 @@
 
-# update_appsettings.ps1 -ResourceGroup "appsvc_linux_centralus_basic" -AppName "AI-CodingAssistant" -DotEnvPath ".env"
+# update_appsettings.ps1 -ResourceGroup "ai-coding-demo" -AppName "ai-assistant-new" -DotEnvPath ".env"
 
 param(
     [Parameter(Mandatory=$true)]

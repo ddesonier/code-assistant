@@ -92,43 +92,46 @@ Format your response exactly as follows:
         message = client.chat.completions.create(
             model=model,
             messages=[
-            {
-            "role": "system",
-            "content": st.session_state.sys_prompt
-            },
-            {
-                "role": "user", 
-                "content": prompt
-            }
+                {
+                    "role": "system",
+                    "content": st.session_state.sys_prompt
+                },
+                {
+                    "role": "user", 
+                    "content": prompt
+                }
             ], 
-        max_tokens=8000,
-        temperature=0,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0,
-        stop=None,
-        stream=False,
-        extra_body={
-            "data_sources": [{
-                "type": "azure_search",
-                "parameters": {
-                "endpoint": f"{search_endpoint}",
-                "index_name": search_index,
-                "semantic_configuration": "default",
-                "query_type": "simple",
-                "fields_mapping": {},
-                "in_scope": True,
-                "role_information": st.session_state.sys_prompt,
-                "filter": None,
-                "strictness": 3,
-                "top_n_documents": 5,
-                "authentication": {
-                    "type": "api_key",
-                    "key": f"{search_key}"
-                }
-                }
-            }]
-        })
+            max_tokens=8000,
+            temperature=0,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0,
+            stop=None,
+            stream=False,
+            extra_body={
+                "data_sources": [
+                    {
+                        "type": "azure_search",
+                        "parameters": {
+                            "endpoint": search_endpoint,
+                            "index_name": search_index,
+                            "semantic_configuration": "default",
+                            "query_type": "simple",
+                            "fields_mapping": {},
+                            "in_scope": True,
+                            "filter": None,
+                            "strictness": 3,
+                            "top_n_documents": 5,
+                            "authentication": {
+                                "type": "api_key",
+                                "key": search_key
+                            }
+                        }
+                    }
+                ]
+            }
+        )
+
         # print("Message: ", message)
         content = message.choices[0].message.content
         # Extract feedback and code
@@ -146,9 +149,10 @@ Format your response exactly as follows:
         return "", ""
 
 
-def process_code(task_description: str, code: str) -> Tuple[str, str]:
-    """Process the code using Azure OpenAI API and return feedback and refined code."""
+def analyze_code(task_description: str, code: str) -> Tuple[str, str]:
+    """Analyze the code using Azure OpenAI API and return feedback and refined code."""
     prompt = f"""
+
 Task Description: {task_description}
 
 
@@ -174,43 +178,45 @@ Format your response exactly as follows:
         message = client.chat.completions.create(
             model=model,
             messages=[
-            {
-            "role": "system",
-            "content": st.session_state.sys_prompt
-            },
-            {
-                "role": "user", 
-                "content": prompt
-            }
+                {
+                    "role": "system",
+                    "content": st.session_state.sys_prompt
+                },
+                {
+                    "role": "user", 
+                    "content": prompt
+                }
             ], 
-        max_tokens=8000,
-        temperature=0,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0,
-        stop=None,
-        stream=False,
-        extra_body={
-            "data_sources": [{
-                "type": "azure_search",
-                "parameters": {
-                "endpoint": f"{search_endpoint}",
-                "index_name": search_index,
-                "semantic_configuration": "default",
-                "query_type": "simple",
-                "fields_mapping": {},
-                "in_scope": True,
-                "role_information": st.session_state.sys_prompt,
-                "filter": None,
-                "strictness": 3,
-                "top_n_documents": 5,
-                "authentication": {
-                    "type": "api_key",
-                    "key": f"{search_key}"
-                }
-                }
-            }]
-        })
+            max_tokens=8000,
+            temperature=0,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0,
+            stop=None,
+            stream=False,
+            extra_body={
+                "data_sources": [
+                    {
+                        "type": "azure_search",
+                        "parameters": {
+                            "endpoint": search_endpoint,
+                            "index_name": search_index,
+                            "semantic_configuration": "default",
+                            "query_type": "simple",
+                            "fields_mapping": {},
+                            "in_scope": True,
+                            "filter": None,
+                            "strictness": 3,
+                            "top_n_documents": 5,
+                            "authentication": {
+                                "type": "api_key",
+                                "key": search_key
+                            }
+                        }
+                    }
+                ]
+            }
+        )
         # print("Message: ", message)
         content = message.choices[0].message.content
         # Extract feedback and code
@@ -255,43 +261,45 @@ Format your response exactly as follows:
         message = client.chat.completions.create(
             model=model,
             messages=[
-            {
-            "role": "system",
-            "content": st.session_state.sys_prompt
-            },
-            {
-                "role": "user", 
-                "content": prompt
+                {
+                    "role": "system",
+                    "content": st.session_state.sys_prompt
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            max_tokens=8000,
+            temperature=0,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0,
+            stop=None,
+            stream=False,
+            extra_body={
+                "data_sources": [
+                    {
+                        "type": "azure_search",
+                        "parameters": {
+                            "endpoint": search_endpoint,
+                            "index_name": search_index,
+                            "semantic_configuration": "default",
+                            "query_type": "simple",
+                            "fields_mapping": {},
+                            "in_scope": True,
+                            "filter": None,
+                            "strictness": 3,
+                            "top_n_documents": 5,
+                            "authentication": {
+                                "type": "api_key",
+                                "key": search_key
+                            }
+                        }
+                    }
+                ]
             }
-            ], 
-        max_tokens=8000,
-        temperature=0,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0,
-        stop=None,
-        stream=False,
-        extra_body={
-            "data_sources": [{
-                "type": "azure_search",
-                "parameters": {
-                "endpoint": f"{search_endpoint}",
-                "index_name": search_index,
-                "semantic_configuration": "default",
-                "query_type": "simple",
-                "fields_mapping": {},
-                "in_scope": True,
-                "role_information": st.session_state.sys_prompt,
-                "filter": None,
-                "strictness": 3,
-                "top_n_documents": 5,
-                "authentication": {
-                    "type": "api_key",
-                    "key": f"{search_key}"
-                }
-                }
-            }]
-        })
+        )
         # print("Message: ", message)
         content = message.choices[0].message.content
         # Extract feedback and code
@@ -331,43 +339,45 @@ Format your response exactly as follows:
         message = client.chat.completions.create(
             model=model,
             messages=[
-            {
-            "role": "system",
-            "content": st.session_state.sys_prompt
-            },
-            {
-                "role": "user", 
-                "content": prompt
+                {
+                    "role": "system",
+                    "content": st.session_state.sys_prompt
+                },
+                {
+                    "role": "user", 
+                    "content": prompt
+                }
+            ],
+            max_tokens=8000,
+            temperature=0,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0,
+            stop=None,
+            stream=False,
+            extra_body={
+                "data_sources": [
+                    {
+                        "type": "azure_search",
+                        "parameters": {
+                            "endpoint": search_endpoint,
+                            "index_name": search_index,
+                            "semantic_configuration": "default",
+                            "query_type": "simple",
+                            "fields_mapping": {},
+                            "in_scope": True,
+                            "filter": None,
+                            "strictness": 3,
+                            "top_n_documents": 5,
+                            "authentication": {
+                                "type": "api_key",
+                                "key": search_key
+                            }
+                        }
+                    }
+                ]
             }
-            ], 
-        max_tokens=8000,
-        temperature=0,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0,
-        stop=None,
-        stream=False,
-        extra_body={
-            "data_sources": [{
-                "type": "azure_search",
-                "parameters": {
-                "endpoint": f"{search_endpoint}",
-                "index_name": search_index,
-                "semantic_configuration": "default",
-                "query_type": "simple",
-                "fields_mapping": {},
-                "in_scope": True,
-                "role_information": st.session_state.sys_prompt,
-                "filter": None,
-                "strictness": 3,
-                "top_n_documents": 5,
-                "authentication": {
-                    "type": "api_key",
-                    "key": f"{search_key}"
-                }
-                }
-            }]
-        })
+        )
         # print("Message: ", message)
         content = message.choices[0].message.content
         # Extract feedback and code
@@ -394,6 +404,13 @@ def main():
     
     st.title("🤖 AI Code Assistant")
     
+    # Move the action selector to the top
+    selected_action = st.selectbox(
+        "Select an action:",
+        ["Analyze Code", "Create README", "Explain Code", "Submit Prompt"]
+    )
+
+
     # Initialize session state
     if 'api_key' not in st.session_state:
         # Try to get API key from environment variables first
@@ -447,38 +464,41 @@ def main():
             height=100,
             placeholder="Describe what you want to achieve with your code..."
         )
+        is_editable = selected_action != "Submit Prompt"  # Disable editing if "Submit Prompt" is selected
 
         code = st.text_area(
             "Your Code",
             height=300,
             placeholder="Paste your code here...",
-            help="Paste the code you want Azure OpenAI to analyze and improve"
+            help="Paste the code you want Azure OpenAI to analyze and improve",
+            disabled=not is_editable
         )
 
-        selected_action = st.selectbox(
-            "Select an Action",
-            ["Analyze Code", "Create Readme", "Explain Code", "Submit Prompt"]
-        )
 
         if st.button("Submit", type="primary"):
+            print("Selected Action:  ", selected_action)
             if selected_action == "Analyze Code":
-                if not task_description:
+                #if not task_description:
+                if task_description is None or task_description.strip() == "":
+                    print("No task description provided, defaulting to 'Analyze Code'")
                     task_description = "Analyze Code"
                     #st.error("Please provide a task description")
-                elif not code:
+                if not code:
                     st.error("Please provide some code to analyze")
                 else:
                     with st.spinner("Analyzing your code..."):
-                        feedback, refined_code = process_code(task_description, code)
+                        print("Analyzing code with task description: ", task_description)
+                        feedback, refined_code = analyze_code(task_description, code)
                         st.session_state.feedback = feedback
                         st.session_state.refined_code = refined_code
                         st.session_state.run_clicked = False
 
             elif selected_action == "Create Readme":
-                if task_description:
-                    task_description = "Create Readme"
+                if task_description is None or task_description.strip() == "":
+                    print("No task description provided, defaulting to 'Create Readme'")
+                    task_description = "Create Readme file for this code"
                     #st.error("Task description will not be used in this prompt")
-                elif not code:
+                if not code:
                     st.error("Please provide code to generate readme file")
                 else:
                     with st.spinner("Submitting your prompt..."):
@@ -488,22 +508,24 @@ def main():
                         st.session_state.run_clicked = False
 
             elif selected_action == "Explain Code":
-                if not task_description:
-                    task_description = "Explain Code"
+                if task_description is None or task_description.strip() == "":
+                    print("No task description provided, defaulting to 'Explain Code'")
+                    task_description = "Explain this code, what the code does and what each line does"
                     #st.error("Please provide a task description")
-                elif not code:
+                if not code:
                     st.error("Please provide some code to explain")
                 else:
-                    with st.spinner("Analyzing your code..."):
+                    with st.spinner("Reading Code to provide explanation..."):
                         feedback, refined_code = explain_code(task_description, code)
                         st.session_state.feedback = feedback
                         st.session_state.refined_code = refined_code
                         st.session_state.run_clicked = False
 
             elif selected_action == "Submit Prompt":
-                if not task_description:
-                    st.error("Please provide a task description")
-                elif code:
+                if task_description is None or task_description.strip() == "":
+                    print("No task description provided, defaulting to 'Submit Prompt'")
+                    task_description = "You are a coding assistant. Provide expert coding help."
+                if code:
                     st.error("The Code will not be used in this prompt.")
                 else:
                     with st.spinner("Submitting your prompt..."):
