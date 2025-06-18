@@ -1,5 +1,5 @@
 
-# update_appsettings.ps1 -ResourceGroup "ai-coding-demo" -AppName "ai-assistant-new" -DotEnvPath ".env"
+# update_appsettings.ps1 -ResourceGroup "ai-coding-demo" -AppName "ai-dev-assistant-DEMO" -DotEnvPath ".env"
 
 param(
     [Parameter(Mandatory=$true)]
